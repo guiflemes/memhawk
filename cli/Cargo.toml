@@ -1,0 +1,9 @@
+[package]
+name = "cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+core = { path = "../core", default-features = false, version = "~0.1.0"}
+clap = { workspace = true}
+once_cell = { workspace = true}

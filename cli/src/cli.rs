@@ -1,5 +1,5 @@
-use crate::monitor::sys_observer::{Info, Monitor};
 use clap::Command;
+use core::monitor::sys_observer::{Info, Monitor};
 use once_cell::sync::Lazy;
 
 struct CliComand {
@@ -55,7 +55,7 @@ fn init_cli() -> Cli {
     let mut cli = Cli::new();
 
     let ram_usage = CliComand::new(
-        "Ram usage",
+        "ram-usage",
         "A tool to monitor RAM usage",
         Box::new(|| {
             MONITOR.display_info(Info::RamUsage);
@@ -63,7 +63,7 @@ fn init_cli() -> Cli {
     );
 
     let list_process = CliComand::new(
-        "Top Process",
+        "top-process",
         "Show most used RAM process",
         Box::new(|| {
             MONITOR.display_info(Info::TopProcess);
