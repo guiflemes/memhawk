@@ -10,3 +10,4 @@ members = [
 sysinfo = "0.29"
 clap = { version = "4.0", features = ["derive"] }
 once_cell = "1.10"
+signal-hook = "0.3"

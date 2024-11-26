@@ -9,7 +9,7 @@ pub enum Info {
     TopProcess,
 }
 
-const MB: u64 = 1_048_576; // 1 MB = 1024 * 1024 bytes
+const MB: u64 = 1024 * 1024;
 
 impl Monitor {
     pub fn new() -> Self {
@@ -59,41 +59,6 @@ impl Monitor {
                     .unwrap_or("No process found".to_string());
                 print!("process: {}", result)
             }
-        }
-    }
-}
-
-#[derive(Clone)]
-pub struct Warning {
-    usage: f64,
-    message: String,
-}
-
-pub struct Config {
-    warnings: Vec<Warning>,
-}
-
-fn check_for_warnigs(current_usage: &f64, threshold: &[Warning]) -> Option<Warning> {
-    threshold
-        .iter()
-        .filter(|warning| warning.usage <= *current_usage)
-        .max_by(|a, b| {
-            a.usage
-                .partial_cmp(&b.usage)
-                .unwrap_or(std::cmp::Ordering::Equal)
-        })
-        .cloned()
-}
-
-pub fn monitor_memory(mut monitor: Monitor, config: Config) {
-    loop {
-        monitor.update();
-        let usage = monitor.ram_consumed();
-        if let Some(warning) = check_for_warnigs(&usage, &config.warnings) {
-            println!(
-                "You already used {} of your memory. {}",
-                usage, warning.message
-            );
         }
     }
 }
